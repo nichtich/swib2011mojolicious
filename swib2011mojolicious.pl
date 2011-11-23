@@ -51,7 +51,7 @@ get '/' => sub {
     );
     $psx->html_charset('UTF-8');
     $psx->force_title('SWIB2011mojolicious');
-    $psx->parse_file('./doc/swib2011mojolicious.pod');
+    $psx->parse_file('doc/swib2011mojolicious.pod');
     $self->render( text => $xhtml );
 };
 
