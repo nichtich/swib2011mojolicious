@@ -108,6 +108,7 @@ sub get_record {
     my $data =
       $ua->get(qq[http://lobid.org/organisation/data/$id.rdf])->res->body;
     if ($data) {
+        $data = Encode::decode( "UTF-8", $data );
         return $data;
     }
     else {
