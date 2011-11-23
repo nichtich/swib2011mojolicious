@@ -101,7 +101,7 @@ get '/isil/data/:id' => sub {
     );
 };
 
-# Beispiel einer Subroutine um Daten von externen einer externen Quelle zu holen
+# Beispiel einer Subroutine um Daten von einer externen Quelle zu holen
 sub get_record {
     my $id = shift;
     my $ua = Mojo::UserAgent->new;
