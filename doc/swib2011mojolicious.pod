@@ -1,0 +1,87 @@
+=head1 NAME
+
+SWIB2011mojolicious
+
+=head1 VERSION
+
+Version 0.01
+
+=head1 DESCRIPTION
+
+B<Prototyp> für eine Linked Data-Anwendung mittels des Web Frameworks 
+L<Mojolicious|http://mojolicio.us>. Wenn für eine I<Non Information Resoure> 
+(NIR) I<Information Resources> (IR) existieren, wird ein B<303 redirect> 
+ausgeführt und mittels I<Content Negotiation> das gewünschte Datenformat 
+ausgeliefert. Andernfalls wird der Statuscode B<404> ausgegeben.
+
+Der Prototyp verwendet B<lobid.org> als Datenquelle. 
+
+Datensätze werden dauerhaft gecached (->keine Updates).
+
+=head1 SYNOPSIS
+
+    # URI der NIR
+    http://127.0.0.1:3000/isil/resource/<ID>
+    
+    # URI der IR
+    http://127.0.0.1:3000/isil/data/<ID>
+
+=head1 SUPPORTED METADATA FORMATS
+
+Standardmäßig wird I<Content negotiation> verwendet, um die IR in dem 
+gewünschten Metadatenformat auszuliefern. Unterstützt die folgenden 
+I<HTTP Accept Headers>: application/rdf, text/html, ... Das gewünschte Metadatenformat kann 
+auch durch die Verwendung der entsprechenden Dateierweiterung (.rdf, ...) gewählt werden.
+
+=head2 RDF
+
+    # URI der IR als RDF
+    http://127.0.0.1:3000/isil/data/DE-600.rdf
+
+=head2 HTML
+
+    # URI der IR als HTML
+    http://127.0.0.1:3000/isil/data/DE-600.html
+
+=head1 USAGE
+    
+    # starte internen Webserver
+    >swib2011mojolicious.pl daemon
+    
+    # hole Daten mittels L<cURL|http://curl.haxx.se/> und I<Content negotiation>
+    >curl -i -L -H "Accept: application/rdf" http://127.0.0.1:3000/isil/resource/DE-600
+    >curl -i -L -H "Accept: text/html" http://127.0.0.1:3000/isil/resource/DE-600
+    
+    # hole Daten mittels Webbrowser
+    L<http://127.0.0.1:3000/isil/data/DE-600.rdf>
+    L<http://127.0.0.1:3000/isil/data/DE-600.html>
+
+=head1 DEPENDENCIES
+
+=over 4
+
+=item * C<Cache::FileCache>
+
+=item * C<Mojolicious::Lite>
+
+=item * C<Mojolicious::Types>
+
+=item * C<Mojo::UserAgent>
+
+=item * C<Mojo::DOM>
+
+=item * C<Pod::Simple::XHTML>
+
+=item * C<RDF::Trine>
+
+=item * C<RDF::Lazy>
+
+=item * C<RDF::NS>
+
+=item * C<RDF::Dumper>
+
+=back
+
+=head1 AUTHOR
+
+Johann Rolschewski, C<< <rolschewski at gmail.com> >>
